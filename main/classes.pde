@@ -1,10 +1,41 @@
 class Player{
   PVector pos;
-  
+  float y_vel= 0;
+  float grav = 1.2;
+  boolean isJumping = false;
   
   Player(){
-    pos = new PVector(1,1);
+    pos = new PVector(width/2,height);
 
+  }
+
+  void update(){
+    if (isJumping) {
+      y_vel += grav;
+      pos.y += y_vel;
+
+      // Prüfe, ob Spieler auf Boden (letzte Tile-Reihe) landet
+      
+      if (pos.y >= height) {
+        pos.y = height;
+        y_vel = 0;
+        isJumping = false;
+      }
+    }
+  }
+
+  void draw(TilemapCollider collider){
+    fill(255,0,0);
+    // Snap auf das nächste Tile (nach unten runden)
+    float snappedY = floor(pos.y / collider.step.y) * collider.step.y;
+    rect(pos.x, snappedY - 2*collider.step.y, collider.step.x, 2*collider.step.y);
+  }
+
+  void jump(){
+    if (!isJumping) {
+      y_vel = -22; // Sprungstärke
+      isJumping = true;
+    }
   }
 
 
