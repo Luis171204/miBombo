@@ -10,3 +10,17 @@ class Player{
 
 
 }
+
+class TilemapCollider{
+    int[][] tilemap;
+    
+    TilemapCollider(){
+        
+    }
+}
+
+class Atlas{
+    Atlas(){
+        
+    }
+}
