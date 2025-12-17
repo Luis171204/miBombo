@@ -13,8 +13,6 @@ class Player{
     if (isJumping) {
       y_vel += grav;
       pos.y += y_vel;
-
-      // Prüfe, ob Spieler auf Boden (letzte Tile-Reihe) landet
       
       if (pos.y >= height) {
         pos.y = height;
@@ -26,14 +24,13 @@ class Player{
 
   void draw(TilemapCollider collider){
     fill(255,0,0);
-    // Snap auf das nächste Tile (nach unten runden)
     float snappedY = floor(pos.y / collider.step.y) * collider.step.y;
     rect(pos.x, snappedY - 2*collider.step.y, collider.step.x, 2*collider.step.y);
   }
 
   void jump(){
     if (!isJumping) {
-      y_vel = -22; // Sprungstärke
+      y_vel = -22; 
       isJumping = true;
     }
   }
